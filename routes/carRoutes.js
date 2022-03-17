@@ -41,7 +41,7 @@ router.put("/replace/:id", (req, res) => {
           if (err)
           return next({status: 400, message: err.message});
           else
-          return res.status(202).send(updatedCar);
+          return res.status(202).send(replaced);
       })
   })
 });
