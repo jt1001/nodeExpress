@@ -29,29 +29,29 @@ router.get("/get/:id", (req, res, next) => { //get by id WORKING
 
 
 
-router.put("/replace/:id", (req, res) => { 
-  const newCar = req.query;
-  const id = req.params.id;
-
-  Car.findByIdAndUpdate(id, newCar, (err, replaced) => {
-      if (err)
-      return next({status: 400, message: err.message });
-      else
-      Car.findById(id, (err, updatedCar) => {
-          if (err)
-          return next({status: 400, message: err.message});
-          else
-          return res.status(202).send(replaced);
-      })
-  })
+  router.put("/replace/:id", ({body: newCar, params: {id}}, res, next) => { //newcar and ID been deconstructed // body changed from query
+    Car.findByIdAndUpdate(id, newCar, (err) => {
+        if (err)
+            return next({status: 400, message: err.message});
+        else 
+            Car.findById(id, (err, updatedCar) => {
+                if (err)
+                    return next({status: 400, message: err.message});
+                else
+                    return res.status(202).send(updatedCar);
+            });
+    })
+   
 });
 
-router.delete("/delete/:id", (req, res) => {//??
-  const id = req.params._id;
+router.delete("/delete/:id", (req, res) => {//Working now
+  const id = req.params.id;
   
   Car.findByIdAndDelete(id, (err) => {
-    if (err) return next({ status: 400, message: err.message });
-    else return res.statusCode(200);
+    if (err) 
+    return next({ status: 400, message: err.message });
+    else 
+    return res.sendStatus(204);
   })
 });
 

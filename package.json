@@ -5,14 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests --exit --reporter nyan",
+    "coverage": "nyc npm test"
   },
   "author": "JT Lana",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.2",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "express": "^4.17.3",
+    "mocha": "^9.2.2",
     "mongoose": "^6.2.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0"
   }
 }
